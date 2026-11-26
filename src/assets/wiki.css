@@ -482,3 +482,7 @@ figure.thumb figcaption .img-credit { text-align: left; }
 .infobox.government .infobox-above { border-top: 2px solid var(--link); border-bottom: 2px solid var(--link); }
 .infobox.government .infobox-type { text-align: center; font-weight: bold; font-variant: small-caps; letter-spacing: .05em; font-size: 105%; }
 .infobox.government .infobox-header { background: var(--infobox-header, #2a2f36); text-align: center; }
+/* one continuous divider line per row: no horizontal gap between cells (Martin, 2026-11-26) */
+.infobox { border-spacing: 0 3px; }
+.infobox th.infobox-label { padding-right: .6em; }
+.infobox td { padding-left: .35em; }
