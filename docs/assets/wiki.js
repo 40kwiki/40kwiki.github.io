@@ -219,7 +219,7 @@
   var popup = null, timer = null, hideTimer = null, titleStash = null;
   function hidePopup() {
     clearTimeout(timer);
-    if (popup) { popup.remove(); popup = null; }
+    if (popup) { var dead = popup; popup = null; dead.classList.remove('in'); dead.classList.add('out'); setTimeout(function () { dead.remove(); }, 180); }
     if (titleStash) { titleStash.el.setAttribute('title', titleStash.t); titleStash = null; }
   }
   function place(el, link) {
@@ -227,8 +227,14 @@
     var x = r.left + window.scrollX, y = r.bottom + window.scrollY + 8;
     var w = el.offsetWidth, maxX = window.scrollX + D.documentElement.clientWidth - w - 12;
     el.style.left = Math.max(12, Math.min(x, maxX)) + 'px';
-    if (r.bottom + el.offsetHeight + 16 > window.innerHeight && r.top > el.offsetHeight + 16) y = r.top + window.scrollY - el.offsetHeight - 8;
+    var up = r.bottom + el.offsetHeight + 16 > window.innerHeight && r.top > el.offsetHeight + 16;
+    if (up) y = r.top + window.scrollY - el.offsetHeight - 8;
     el.style.top = y + 'px';
+    el.classList.toggle('flip', up);
+    // The pointer sits under the start of the link, like Wikipedia's previews.
+    var left = parseFloat(el.style.left);
+    el.style.setProperty('--arrow', Math.max(14, Math.min(x + Math.min(r.width / 2, 24) - left, w - 24)) + 'px');
+    requestAnimationFrame(function () { el.classList.add('in'); });
   }
   function show(link, html) {
     hidePopup();
@@ -312,7 +318,7 @@
 
   /* ---------- Image lightbox ---------- */
   var lb = null;
-  function closeLightbox() { if (lb) { lb.remove(); lb = null; } }
+  function closeLightbox() { if (lb) { var dead = lb; lb = null; dead.classList.remove('in'); setTimeout(function () { dead.remove(); }, 200); } }
   D.addEventListener('click', function (e) {
     var img = e.target.closest('figure.thumb img, .infobox img, .gallery img');
     if (!img) return;
@@ -326,6 +332,7 @@
     lb.innerHTML = '<button aria-label="Close">&times;</button><img src="' + img.currentSrc + '" alt="' + esc(img.alt) + '">' + '<p>' + (cap ? cap.innerHTML : '') + (img.getAttribute('data-credit') ? '<br><small style="opacity:.75">' + esc(img.getAttribute('data-credit')) + '</small>' : '') + '</p>';
     lb.addEventListener('click', function (ev) { if (ev.target === lb || ev.target.tagName === 'BUTTON') closeLightbox(); });
     B.appendChild(lb);
+    requestAnimationFrame(function () { if (lb) lb.classList.add('in'); });
   });
 
   /* ---------- Tools menu actions ---------- */

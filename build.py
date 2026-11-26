@@ -14,6 +14,7 @@ HERE = Path(__file__).resolve().parent
 SRC = HERE / "src"
 OUT = Path(os.environ.get("WIKI_OUT", HERE / "docs"))
 REPO = "40kwiki/40kwiki.github.io"
+SITE = "https://40kwiki.github.io/"
 GH = f"https://github.com/{REPO}"
 ROOT = "../../"
 
@@ -117,6 +118,28 @@ def fuzzy(title, titles, redirects):
             return idx[c]
     return None
 
+
+
+PORTAL_RULES = [
+    ("Horus Heresy", ("horus heresy", "thirty-first", "31st", "great crusade", "legion")),
+    ("Space Marines", ("space marine", "chapter", "astartes", "primarch", "legion")),
+    ("Chaos", ("chaos", "daemon", "traitor", "heretic", "black crusade")),
+    ("Inquisition", ("inquisition", "ordo", "ordos")),
+    ("Adeptus Mechanicus", ("mechanicus", "forge", "titan", "mars")),
+    ("Astra Militarum", ("astra militarum", "imperial guard", "regiment", "imperial army")),
+    ("Xenos", ("xenos", "aeldari", "ork", "necron", "t'au", "tyranid", "drukhari", "votann")),
+    ("Geography", ("sector", "world", "system", "planet", "segmentum", "region")),
+    ("Era Indomitus", ("era indomitus", "forty-second", "42nd", "indomitus")),
+]
+
+
+def auto_portals(p):
+    """Portal bar for every article, picked from its categories; Imperium as the fallback."""
+    cats = " ".join(c.lower() for c in p["meta"]["categories"])
+    picks = [n for n, keys in PORTAL_RULES if any(k in cats for k in keys)][:3]
+    if not any(n in ("Xenos",) for n in picks) and "Imperium of Mankind" not in picks:
+        picks.append("Imperium of Mankind")
+    return "|".join(picks[:4])
 
 
 def portal_box(names, pages):
@@ -299,6 +322,7 @@ def build():
     (OUT / ".nojekyll").write_text("")
 
     index = []
+    sitemap = []
     today = datetime.date.today()
     for p in pages:
         meta, kind = p["meta"], p["meta"]["kind"]
@@ -306,6 +330,10 @@ def build():
         if kind == "category":
             body = category_body(p, titles)
         body = re.sub(r"\{\{navbox:([^}]+)\}\}", lambda m: (SRC / "navboxes" / (m.group(1).strip() + ".html")).read_text(encoding="utf-8") if (SRC / "navboxes" / (m.group(1).strip() + ".html")).exists() else "", body)
+        if kind == "article" and "{{portal" not in body and not p["title"].startswith(("Portal:", "Special:", "Main Page", "40,000")):
+            m = re.search(r'<h2>(?:Notes|References)</h2>', body)
+            box = "{{portal:" + auto_portals(p) + "}}\n"
+            body = body[:m.start()] + box + body[m.start():] if m else body + box
         body = re.sub(r"\{\{portals?:([^}]+)\}\}", lambda m: portal_box(m.group(1), pages), body)
         if p["title"] == "Special:ImageCredits":
             body = body.replace("{{CREDITS}}", credits_html(pages))
@@ -345,10 +373,44 @@ def build():
                           f'<a href="{GH}/edit/main/{src}" title="Edit this page on GitHub">Edit</a>'
                           f'<a href="{GH}/commits/main/{src}" title="Past revisions of this page">View history</a>')
         tools_src = f"{GH}/blob/main/src/articles/{p['file']}" if p["file"] else GH
+        # Search engines: one canonical URL, a real description, a share card and Article data.
+        url = SITE + "wiki/" + urllib.parse.quote(slug(p["title"])) + "/"
+        box0 = re.search(r'<table class="infobox".*?</table>', p["body"], re.S)
+        pic0 = re.search(r'assets/img/([^"\']+)"', box0.group(0)) if box0 else None
+        img = pic0.group(1) if pic0 else meta.get("image", "")
+        img_url = SITE + "assets/img/" + urllib.parse.quote(img) if img else SITE + "assets/img/logo-180.png"
+        lead = lead_text(body)
+        desc = lead if len(lead) > 60 else (meta.get("short", "") or lead)
+        if len(desc) > 158:
+            desc = desc[:158].rsplit(" ", 1)[0].rstrip(",;:") + "..."
+        special = p["title"].startswith("Special:")
+        seo = [f'<link rel="canonical" href="{url}">',
+               f'<meta property="og:url" content="{url}">',
+               f'<meta property="og:image" content="{img_url}">',
+               f'<meta property="og:type" content="{"website" if kind == "main" else "article"}">',
+               '<meta property="og:site_name" content="40,000 Wiki">',
+               '<meta name="twitter:card" content="summary_large_image">']
+        if special:
+            seo.append('<meta name="robots" content="noindex,follow">')
+        if kind == "article":
+            ld = {"@context": "https://schema.org", "@type": "Article", "headline": p["title"],
+                  "description": desc, "image": img_url, "url": url, "dateModified": d.isoformat(),
+                  "inLanguage": "en", "isPartOf": {"@type": "WebSite", "name": "40,000 Wiki", "url": SITE},
+                  "publisher": {"@type": "Organization", "name": "40,000 Wiki", "url": "https://github.com/40kwiki"}}
+            seo.append('<script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace("</", "<\\/") + "</script>")
+        elif kind == "main":
+            ld = {"@context": "https://schema.org", "@type": "WebSite", "name": "40,000 Wiki", "url": SITE,
+                  "potentialAction": {"@type": "SearchAction", "target": SITE + "wiki/Special_Search/?search={q}",
+                                      "query-input": "required name=q"}}
+            seo.append('<script type="application/ld+json">' + json.dumps(ld) + "</script>")
+        if not special:
+            sitemap.append((url, d.isoformat()))
         values = {
+            "SEO": "\n".join(seo),
+            "PAGETITLE": "40,000 Wiki, the Warhammer 40,000 lore encyclopedia" if kind == "main" else html.escape(p["title"]) + " - 40,000 Wiki",
             "TITLE": html.escape(p["title"]),
             "DISPLAYTITLE": display,
-            "DESC": html.escape(meta.get("short", "") or lead_text(body)[:160]),
+            "DESC": html.escape(desc),
             "ROOT": ROOT,
             "BODYCLASS": f"ns-{kind}" + ("" if toc else " no-toc"),
             "TOC": toc_html(toc),
@@ -389,6 +451,8 @@ def build():
         to = f"../{slug(target)}/?redirectedfrom={urllib.parse.quote(alias)}"
         (dest / "index.html").write_text(
             f'<!DOCTYPE html><meta charset="utf-8"><title>{html.escape(alias)}</title>'
+            f'<meta name="robots" content="noindex,follow">'
+            f'<link rel="canonical" href="{SITE}wiki/{urllib.parse.quote(slug(target))}/">'
             f'<meta http-equiv="refresh" content="0; url={to}">'
             f'<script>location.replace("{to}"+location.hash)</script>'
             f'<p>Redirecting to <a href="{to}">{html.escape(target)}</a>.</p>', encoding="utf-8")
@@ -399,10 +463,15 @@ def build():
     (OUT / "index.html").write_text(
         '<!DOCTYPE html><meta charset="utf-8"><title>40,000 Wiki</title>'
         '<meta http-equiv="refresh" content="0; url=wiki/Main_Page/">'
-        '<link rel="canonical" href="wiki/Main_Page/"><a href="wiki/Main_Page/">40,000 Wiki</a>', encoding="utf-8")
+        f'<link rel="canonical" href="{SITE}wiki/Main_Page/"><a href="wiki/Main_Page/">40,000 Wiki</a>', encoding="utf-8")
     (OUT / "404.html").write_text(
         (OUT / "wiki" / "Special_Missing" / "index.html").read_text(encoding="utf-8")
         .replace('"../../', '"/'), encoding="utf-8")
+    (OUT / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f"<url><loc>{html.escape(u)}</loc><lastmod>{m}</lastmod></url>\n" for u, m in sitemap)
+        + "</urlset>\n", encoding="utf-8")
+    (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}sitemap.xml\n", encoding="utf-8")
     print(f"Built {count} articles, {len(cats)} categories, {len(redirects)} redirects -> {OUT}")
 
 

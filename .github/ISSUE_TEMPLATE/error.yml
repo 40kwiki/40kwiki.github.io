@@ -1,0 +1,23 @@
+name: Report an error
+description: A fact, date, link, image or layout on a page is wrong
+labels: ["error"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The article title or its link
+      placeholder: https://40kwiki.github.io/wiki/Horus_Heresy/
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source
+      description: The book, codex or novel that gives the correct fact, with page or chapter if you have it

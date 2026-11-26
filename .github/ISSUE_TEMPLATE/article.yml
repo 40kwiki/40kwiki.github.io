@@ -1,0 +1,18 @@
+name: Request an article
+description: Ask for a missing page or a much longer one
+labels: ["article request"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Article title
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What it should cover
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources you know of

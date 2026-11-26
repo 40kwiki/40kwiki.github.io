@@ -486,3 +486,32 @@ figure.thumb figcaption .img-credit { text-align: left; }
 .infobox { border-spacing: 0 3px; }
 .infobox th.infobox-label { padding-right: .6em; }
 .infobox td { padding-left: .35em; }
+/* conflict box closer to Wikipedia's: plain centred section heads, dotted civilian row */
+.infobox.military .infobox-header { background: none; font-size: 112%; padding-top: .5em; }
+.infobox.military td.infobox-civilians { text-align: center; border-top: 1px dotted var(--border); padding-top: .3em; }
+.infobox.military td b + br { line-height: 1.2; }
+/* hatnotes sit on a faint band, as in Wikipedia's dark theme */
+.hatnote { background: var(--bg-subtle, #1b1f24); padding: .25em .6em .25em 1.6em; margin-bottom: .6em; }
+
+/* Motion, after Wikipedia: previews fade and rise in with a pointer, the lightbox fades and zooms */
+.wp-popup { overflow: visible; opacity: 0; transform: translateY(8px); transition: opacity .18s ease, transform .18s ease; }
+.wp-popup.flip { transform: translateY(-8px); }
+.wp-popup.in { opacity: 1; transform: none; }
+.wp-popup.out { opacity: 0; transition-duration: .15s; pointer-events: none; }
+.wp-popup > :first-child { border-radius: 2px 2px 0 0; }
+.wp-popup::before { content: ""; position: absolute; top: -7px; left: calc(var(--arrow, 20px) - 7px); width: 14px; height: 14px; background: var(--bg); transform: rotate(45deg); box-shadow: -1px -1px 0 rgba(0,0,0,.08); z-index: -1; }
+.wp-popup.flip::before { top: auto; bottom: -7px; box-shadow: 1px 1px 0 rgba(0,0,0,.08); }
+.wp-popup .pp-img { border-radius: 2px 2px 0 0; }
+.lightbox { opacity: 0; transition: opacity .2s ease; }
+.lightbox img { transform: scale(.96); transition: transform .2s ease; }
+.lightbox.in { opacity: 1; }
+.lightbox.in img { transform: none; }
+.navbox-toggle, .toc a, .tabs a { transition: color .12s, background-color .12s, border-color .12s; }
+.mw-parser-output ol.references li:target, .mw-parser-output sup:target { animation: wp-target 2.4s ease-out; }
+@keyframes wp-target { from { background: var(--target); box-shadow: 0 0 0 3px var(--target); } }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .wp-popup, .lightbox, .lightbox img { transition: none; }
+  .mw-parser-output ol.references li:target, .mw-parser-output sup:target { animation: none; }
+}

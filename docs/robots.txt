@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://40kwiki.github.io/sitemap.xml
