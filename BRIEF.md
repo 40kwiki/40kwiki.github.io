@@ -1,7 +1,7 @@
 # Writer brief (shared by every writer agent)
 
 You write articles for "40,000 Wiki", a static Wikipedia clone of Warhammer 40,000 lore written fully
-IN-UNIVERSE. Repo: /Users/martinmuskov/Docs/GitHub/misc/warpedia.
+IN-UNIVERSE (prose only: references cite real published books, see STYLE.md "Sources and citations"). Repo: /Users/martinmuskov/Docs/GitHub/misc/warpedia.
 
 1. Read STYLE.md and README.md in full, then two finished articles as models:
    src/articles/Horus_Heresy.html and src/articles/Rogal_Dorn.html (or Ultramarines.html for units).

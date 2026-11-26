@@ -369,7 +369,7 @@
       var file = encodeURIComponent(slug(mt) + '.html');
       sp.innerHTML = '<div class="ambox"><div><b>40,000 Wiki does not have an article with this exact name.</b> Please <a href="' + ROOT +
         'wiki/Special_Search/?search=' + encodeURIComponent(mt) + '">search for <i>' + esc(mt) + '</i> in 40,000 Wiki</a> to check for alternative titles or spellings.</div></div>' +
-        '<ul><li><a href="https://github.com/martin-k-m/warpedia/new/main/src/articles?filename=' + file + '">Start the <b>' + esc(mt) + '</b> article</a> on GitHub, or ask Claude to write it.</li>' +
+        '<ul><li><a href="https://github.com/40kwiki/40kwiki.github.io/new/main/src/articles?filename=' + file + '">Start the <b>' + esc(mt) + '</b> article</a> on GitHub, or ask Claude to write it.</li>' +
         '<li>Look for pages within 40,000 Wiki that <a href="' + ROOT + 'wiki/Special_WhatLinksHere/?target=' + encodeURIComponent(mt) + '">link to this title</a>' +
         (linkers.length ? ' (' + linkers.length + ' page' + (linkers.length > 1 ? 's' : '') + ' already do).' : '.') + '</li>' +
         '<li>Read about it elsewhere: <a href="https://wh40k.lexicanum.com/wiki/' + encodeURIComponent(slug(mt)) + '">Lexicanum</a> · <a href="https://warhammer40k.fandom.com/wiki/' + encodeURIComponent(slug(mt)) + '">Fandom</a></li></ul>';

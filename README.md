@@ -1,7 +1,7 @@
 # 40,000 Wiki
 
 A Wikipedia-style encyclopedia of the Warhammer 40,000 setting, served by GitHub Pages at
-https://martin-k-m.github.io/warpedia/.
+https://40kwiki.github.io/.
 
 Personal, non-commercial fan project. Not affiliated with Games Workshop or the Wikimedia Foundation.
 

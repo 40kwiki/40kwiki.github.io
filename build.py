@@ -13,7 +13,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 SRC = HERE / "src"
 OUT = Path(os.environ.get("WIKI_OUT", HERE / "docs"))
-REPO = "martin-k-m/warpedia"
+REPO = "40kwiki/40kwiki.github.io"
 GH = f"https://github.com/{REPO}"
 ROOT = "../../"
 
@@ -310,6 +310,7 @@ def build():
         # every wikitable scrolls in its own box, so no table can widen the page on a phone
         body = re.sub(r'<div class="table-wrap">\s*(<table class="wikitable.*?</table>)\s*</div>', r"\1", body, flags=re.S)
         body = re.sub(r'<table class="wikitable.*?</table>', lambda m: '<div class="table-wrap">' + m.group(0) + '</div>', body, flags=re.S)
+        body = credit_images(body)
         if p["title"] == "Special:ImageCredits":
             body = body.replace("{{CREDITS}}", credits_html(pages))
         body, links = render_links(body, p, titles, redirects)
@@ -401,14 +402,37 @@ def build():
         '<link rel="canonical" href="wiki/Main_Page/"><a href="wiki/Main_Page/">40,000 Wiki</a>', encoding="utf-8")
     (OUT / "404.html").write_text(
         (OUT / "wiki" / "Special_Missing" / "index.html").read_text(encoding="utf-8")
-        .replace('"../../', '"/warpedia/'), encoding="utf-8")
+        .replace('"../../', '"/'), encoding="utf-8")
     print(f"Built {count} articles, {len(cats)} categories, {len(redirects)} redirects -> {OUT}")
+
+
+DEFAULT_CREDIT = "Artwork © Games Workshop"
+
+
+def credit_images(body):
+    """Every image carries a credit; lead and figure images show it under the caption."""
+    body = re.sub(r'<img (?![^>]*data-credit)([^>]*src="[^"]*assets/img/(?!logo)[^"]*\.(?:png|jpe?g|webp|gif)"[^>]*)>',
+                  lambda m: f'<img {m.group(1)} data-credit="{DEFAULT_CREDIT}">', body)
+
+    def tag(block, close):
+        m = re.search(r'data-credit="([^"]*)"', block)
+        if not m or 'class="img-credit"' in block:
+            return block
+        i = block.rfind(close)
+        return block[:i] + f'<span class="img-credit">{m.group(1)}</span>' + block[i:]
+
+    body = re.sub(r'<figure\b.*?</figure>', lambda m: tag(m.group(0), "</figcaption>") if "</figcaption>" in m.group(0) else m.group(0), body, flags=re.S)
+    body = re.sub(r'<td[^>]*class="infobox-image".*?</td>', lambda m: tag(m.group(0), "</td>"), body, flags=re.S)
+    return body
 
 
 def credits_html(pages):
     seen, rows = set(), []
     for p in pages:
-        for src, credit in re.findall(r'<img[^>]*src="[^"]*?assets/img/([^"]+)"[^>]*data-credit="([^"]*)"', p["body"]):
+        for tag in re.findall(r'<img[^>]*src="[^"]*?assets/img/[^"]+"[^>]*>', p["body"]):
+            src = re.search(r'assets/img/([^"?]+)', tag).group(1)
+            c = re.search(r'data-credit="([^"]*)"', tag)
+            credit = c.group(1) if c else DEFAULT_CREDIT
             if src in seen:
                 continue
             seen.add(src)

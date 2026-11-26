@@ -467,3 +467,8 @@ html { background: #101418; color-scheme: dark; }
 .portal-grid > section > h2 { margin: 0 -12px 8px; padding: 4px 12px; background: var(--bg-interactive); border-bottom: 1px solid var(--border-subtle); font-size: 1.05em; font-family: inherit; font-weight: bold; }
 .portal-grid .wide { grid-column: 1 / -1; }
 @media (max-width: 720px) { .portal-grid { grid-template-columns: 1fr; } }
+/* black emblems made transparent 2026-11-26: show light on the dark-only site */
+img[src*="icon-apothecarion"], img[src*="icon-armoury"], img[src*="icon-astronomica"], img[src*="icon-legio-cybernetica"], img[src*="icon-librarius"], img[src*="icon-reclusiam"] { filter: invert(1); }
+/* visible art credit under every lead and figure image */
+.img-credit { display: block; margin-top: 2px; font-size: 11px; line-height: 1.3; color: var(--text-subtle, #a2a9b1); font-style: normal; text-align: center; }
+figure.thumb figcaption .img-credit { text-align: left; }

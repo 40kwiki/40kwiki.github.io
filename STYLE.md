@@ -6,8 +6,9 @@ It must read exactly like a modern English Wikipedia article.
 
 ## In-universe rules (hard)
 
-- Never mention Games Workshop, the tabletop game, miniatures, editions, codex releases as products,
-  novels, authors, artists, "fiction", "lore", "canon", "retcon", "setting", "fans" or real-world years.
+- In the prose, never mention Games Workshop, the tabletop game, miniatures, editions, novels, authors,
+  artists, "fiction", "lore", "canon", "retcon", "setting", "fans" or real-world years. The
+  references section is the exception: it cites real books (see Sources and citations).
 - Every date uses the Imperial calendar: `005.M31`, `c. 798.M30`, `M36`, `the late 41st millennium`.
 - Contradictions in the sources become in-universe disagreements: "Imperial accounts differ",
   "Ecclesiarchy tradition holds…, while Mechanicus records…", "sealed by Inquisitorial edict".
@@ -20,27 +21,23 @@ It must read exactly like a modern English Wikipedia article.
   https://wh40k.lexicanum.com and https://warhammer40k.fandom.com (read with curl). Write in your own
   words; never copy sentences from those sites.
 
-## Sources and citations
+## Sources and citations (Martin, 2026-11-26)
 
-Cite **in-universe works only**, in Wikipedia citation format, with Imperial dates. Reuse these where
-they fit, so references stay consistent across articles; invent further plausible archives when needed.
+The prose stays in-universe. The **references cite the real published works** the facts come from:
+codexes, campaign books, Black Library novels and audio dramas, the Forge World Horus Heresy books,
+White Dwarf, the roleplaying game books. This is a lore encyclopedia, so cite the lore source, never
+tabletop rules.
 
-- Guilliman, Roboute (c. 019.M31). <i>Codex Astartes</i>. Macragge.
-- Sindermann, Kyril (c. 004.M31). <i>Remembrances of the 63rd Expedition</i>. Remembrancer Order.
-- Oliton, Mersadie (c. 005.M31). <i>Chronicles of the Luna Wolves</i>. Remembrancer Order.
-- <i>Liber Primarchus</i> (M32, revised M41). Administratum Archive, Terra.
-- <i>Codex Imperialis</i> (rev. 980.M41). Adeptus Terra.
-- <i>Chronicles of the Heresy</i> (sealed). Logos Historica Verita, Terra.
-- <i>Liber Ecclesiasticus</i> (M37). Adeptus Ministorum.
-- Eisenhorn, Gregor (c. 300.M41). <i>Memoirs of an Inquisitor</i>. Ordo Xenos (sealed).
-- <i>Imperial Infantryman's Uplifting Primer</i> (rev. 990.M41). Departmento Munitorum.
-- <i>Lexicanum Martialis</i>. Officio Militaris.
-- Cawl, Belisarius (c. 999.M41). <i>Notes on the Ultima Founding</i>. Mars.
-- <i>Records of the Indomitus Crusade</i> (ongoing). Office of the Lord Commander.
-
-Format: `<cite class="citation">Author (date). <i>Title</i>. Archive or place.</cite>`. Use
-list-defined references (see Imperium_of_Mankind.html), named refs reused across the article, and
-explanatory notes with `group="note"`.
+- Take the sources from the matching Fandom article's own footnotes and Sources list
+  (`api.php?action=parse&prop=wikitext&format=json&page=X`): they give book, edition and page.
+  Cite only a work that really covers that fact. Never invent a book, page or chapter.
+- Format: `<cite class="citation">Author (year). <i>Title</i> (edition or format). Publisher. pp. or ch.</cite>`,
+  e.g. `Abnett, Dan (2006). <i>Horus Rising</i> (novel). Black Library. ch. 3.` or
+  `<i>Codex: Space Marines</i> (10th edition, 2023). Games Workshop. pp. 10-14.` Leave out what you
+  do not know (year, page); never guess.
+- If no book can be pinned down, cite the reference article: `"Horus". <i>Warhammer 40k Wiki</i> (Fandom).`
+- Use list-defined references (see Imperium_of_Mankind.html), named refs reused across the article,
+  and explanatory notes with `group="note"`. "Further reading" lists real novels and books.
 
 ## Article shape (match Wikipedia)
 
