@@ -526,3 +526,7 @@ html { scroll-behavior: smooth; }
 .mw-heading2.m-collapsible.m-closed::before { transform: translateY(-50%) rotate(-45deg); }
 .mw-heading2.m-closed + .m-section { display: none; }
 .mw-heading2.m-collapsible .mw-editsection { display: none; }
+
+/* Portals: the selected picture fills its box */
+.portal-grid figure.thumb { float: none; clear: both; width: auto; max-width: none; margin: 4px 0 0; }
+.portal-grid figure.thumb img { width: 100%; max-width: 100%; height: auto; }
