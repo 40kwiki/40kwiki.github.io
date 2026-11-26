@@ -325,7 +325,11 @@ def build():
             entry["i"] = meta["image"]
         index.append(entry)
 
+    taken = {slug(t).lower() for t in titles}  # macOS disks ignore case
     for alias, target in redirects.items():
+        if slug(alias).lower() in taken:
+            continue
+        taken.add(slug(alias).lower())
         dest = OUT / "wiki" / slug(alias)
         dest.mkdir(parents=True, exist_ok=True)
         to = f"../{slug(target)}/?redirectedfrom={urllib.parse.quote(alias)}"

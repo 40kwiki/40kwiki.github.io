@@ -21,4 +21,11 @@ IN-UNIVERSE. Repo: /Users/martinmuskov/Docs/GitHub/misc/warpedia.
 7. Do not write pages another writer owns. Check `ls src/articles` again just before writing each file;
    if it already exists, skip it and say so. Add sensible `redirects:` (alternative names, planets for
    campaigns) only when no existing page uses that title.
-8. Reply with: titles written, word counts, images, and any facts you could not verify.
+8. Dates: give a date for every event, reign, founding and death you mention, in the Imperial
+   calendar. Where no record gives one, give the best estimate as "c. 650.M35" or "mid-M38" and, if it is
+   only inferred, say so in a note (e.g. "date estimated from the sequence of events"). Infobox dates too.
+   Add a short dated timeline (wikitable or list) to every history-heavy article.
+9. Links: link the first mention of every person, place, organisation, office, rank, world type, event and
+   concept, in prose AND in infoboxes and tables. Check `ls src/articles` and redirects so the link hits
+   an existing page whenever one exists.
+10. Reply with: titles written, word counts, images, and any facts you could not verify.

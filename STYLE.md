@@ -153,3 +153,9 @@ Legion, Chapter and organisation symbols use Lexicanum's files, saved as `src/as
 (icon-ultramarines.png, icon-inquisition.png, icon-ecclesiarchy.jpg...). Reuse those names; do not add other badge files.
 Lexicanum blocks curl for pages but serves image files: open the page in the browser pane, read the
 infobox `<img>` src, strip `/thumb/` and the size suffix, then curl `https://wh40k.lexicanum.com/mediawiki/images/<h>/<hh>/<File>`.
+
+## Links and dates (Martin, 2026-11-25)
+
+- The Imperium of Mankind page must have no red links. Check it after every wave.
+- Link generously: first mention of everything, prose, infoboxes and tables. Prefer existing titles and redirects.
+- Give years for everything. When no record has one, give an estimate ("c. 650.M35", "mid-M38") and note it as estimated.
