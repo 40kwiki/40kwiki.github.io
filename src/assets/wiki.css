@@ -5,7 +5,7 @@
   --border: #a2a9b1; --border-subtle: #c8ccd1; --border-muted: #dadde3;
   --link: #3366cc; --link-visited: #6a60b0; --link-new: #d73333; --link-new-visited: #a55858; --link-hover: #3056a9;
   --target: #eaf3ff;
-  --infobox-bg: #f8f9fa; --infobox-head: #ccd2f9;
+  --infobox-bg: #f8f9fa; --infobox-head: #ccd2f9; --royal-above: #cbe; --royal-head: #e6e0f8; --mil-above: #b0c4de; --mil-head: #dcdcdc;
   --navbox-title: #ccccff; --navbox-group: #ddddff; --navbox-even: #f7f7f7;
   --mp-green-bg: #f5fffa; --mp-green-head: #cef2e0; --mp-green-border: #a3bfb1;
   --mp-blue-bg: #f5faff; --mp-blue-head: #cedff2; --mp-blue-border: #a3b0bf;
@@ -23,7 +23,7 @@
   --border: #72777d; --border-subtle: #54595d; --border-muted: #3a3d41;
   --link: #88a3e8; --link-visited: #a799cd; --link-new: #fd7865; --link-new-visited: #c98074; --link-hover: #b0c1f0;
   --target: #1c2a44;
-  --infobox-bg: #1b1e22; --infobox-head: #2e3555;
+  --infobox-bg: #1b1e22; --infobox-head: #2e3555; --royal-above: #3d3463; --royal-head: #2c2745; --mil-above: #2e3d52; --mil-head: #2a2d31;
   --navbox-title: #2b2e5e; --navbox-group: #23264b; --navbox-even: #16181b;
   --mp-green-bg: #0f1a15; --mp-green-head: #183829; --mp-green-border: #2e5a46;
   --mp-blue-bg: #0f1520; --mp-blue-head: #1a2f4b; --mp-blue-border: #2f4a6d;
@@ -38,7 +38,7 @@
   --border: #72777d; --border-subtle: #54595d; --border-muted: #3a3d41;
   --link: #88a3e8; --link-visited: #a799cd; --link-new: #fd7865; --link-new-visited: #c98074; --link-hover: #b0c1f0;
   --target: #1c2a44;
-  --infobox-bg: #1b1e22; --infobox-head: #2e3555;
+  --infobox-bg: #1b1e22; --infobox-head: #2e3555; --royal-above: #3d3463; --royal-head: #2c2745; --mil-above: #2e3d52; --mil-head: #2a2d31;
   --navbox-title: #2b2e5e; --navbox-group: #23264b; --navbox-even: #16181b;
   --mp-green-bg: #0f1a15; --mp-green-head: #183829; --mp-green-border: #2e5a46;
   --mp-blue-bg: #0f1520; --mp-blue-head: #1a2f4b; --mp-blue-border: #2f4a6d;
@@ -218,6 +218,12 @@ abbr[title] { text-decoration: underline dotted; cursor: help; }
 .infobox-motto { text-align: center !important; font-size: 95%; line-height: 1.4; }
 .infobox .plainlist ul { list-style: none; margin: 0; padding: 0; }
 .infobox .plainlist li { margin: 0; }
+.infobox.royalty .infobox-above { background: var(--royal-above); }
+.infobox.royalty .infobox-header, .infobox.royalty .infobox-band { background: var(--royal-head); text-align: center !important; }
+.infobox.military .infobox-above { background: var(--mil-above); }
+.infobox.military .infobox-header { background: var(--mil-head); text-align: center !important; }
+.infobox .infobox-band { height: 6px; padding: 0 !important; line-height: 0; }
+.infobox.royalty .infobox-subheader { font-style: italic; }
 .infobox img.map { border: 1px solid var(--border-subtle); background: var(--img-bg); }
 
 /* Figures */
@@ -417,3 +423,10 @@ html.wp-appearance-hidden.wp-toc-hidden .page, html.wp-appearance-hidden body.no
   .infobox, figure.thumb { break-inside: avoid; }
 }
 body.ns-main .lang-btn { display: none; }
+.wp-popup .pp-img { background-position: center 20%; }
+.wp-popup .pp-img.pp-icon { background-size: contain; background-color: var(--img-bg); background-origin: content-box; padding: 14px; }
+.suggestions .sg-thumb { background-position: center 20%; }
+/* Symbols: transparent; black-on-clear logos turn light in dark mode */
+img[src*="/icon-"], img[src*="-mark.png"], img[src*="-icon.png"], img[src*="-sigil.png"], img[src*="-rune.png"], img[src*="-glyph.png"], img[src*="-symbol.png"], img[src*="-seal.png"], img[src*="-badge.png"], img[src*="chaos-star"] { background: transparent !important; border: 0 !important; }
+:root[data-theme="dark"] img[src*="icon-astartes"], :root[data-theme="dark"] img[src*="icon-adeptus-terra"], :root[data-theme="dark"] img[src*="icon-high-lords"], :root[data-theme="dark"] img[src*="icon-administratum"], :root[data-theme="dark"] img[src*="icon-ecclesiarchy"], :root[data-theme="dark"] img[src*="icon-assassinorum"], :root[data-theme="dark"] img[src*="icon-arbites"], :root[data-theme="dark"] img[src*="icon-chaos-star"], :root[data-theme="dark"] img[src*="icon-aquila"] { filter: invert(1); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img[src*="icon-astartes"], :root:not([data-theme="light"]) img[src*="icon-adeptus-terra"], :root:not([data-theme="light"]) img[src*="icon-high-lords"], :root:not([data-theme="light"]) img[src*="icon-administratum"], :root:not([data-theme="light"]) img[src*="icon-ecclesiarchy"], :root:not([data-theme="light"]) img[src*="icon-assassinorum"], :root:not([data-theme="light"]) img[src*="icon-arbites"], :root:not([data-theme="light"]) img[src*="icon-chaos-star"], :root:not([data-theme="light"]) img[src*="icon-aquila"] { filter: invert(1); } }

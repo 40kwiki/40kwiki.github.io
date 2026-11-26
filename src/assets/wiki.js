@@ -256,7 +256,8 @@
     var t = link.getAttribute('data-wp-title');
     var p = t && resolve(t);
     if (!p || !p.x || p.t === B.getAttribute('data-title')) return null;
-    var img = p.i ? '<div class="pp-img" style="background-image:url(' + ROOT + 'assets/img/' + esc(p.i) + ')"></div>' : '';
+    var icon = p.i && /\.(png|svg)$/i.test(p.i);
+    var img = p.i ? '<div class="pp-img' + (icon ? ' pp-icon' : '') + '" style="background-image:url(' + ROOT + 'assets/img/' + esc(p.i) + ')"></div>' : '';
     return img + '<div class="pp-body fade"><p>' + bold(p.x, p.t) + '</p></div>';
   }
   $$('.mw-parser-output a[title]').forEach(function (a) {

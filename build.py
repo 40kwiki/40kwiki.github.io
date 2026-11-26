@@ -317,7 +317,11 @@ def build():
         text = strip_tags(re.sub(r"<(table|style|sup)\b.*?</\1>", " ", body, flags=re.S))
         entry = {"t": p["title"], "k": kind[0], "d": meta.get("short", ""), "x": lead_text(body)[:420],
                  "l": links, "b": re.sub(r"\s+", " ", text)[:40000]}
-        if meta.get("image"):
+        box = re.search(r'<table class="infobox".*?</table>', p["body"], re.S)
+        pic = re.search(r'assets/img/([^"\']+)"', box.group(0)) if box else None
+        if pic:
+            entry["i"] = pic.group(1)  # hover previews and search use the infobox image
+        elif meta.get("image"):
             entry["i"] = meta["image"]
         index.append(entry)
 

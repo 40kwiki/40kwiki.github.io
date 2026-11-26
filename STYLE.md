@@ -117,3 +117,39 @@ publishers, no watermark-heavy images, no photos of miniatures or people. 2–5 
 Every `<img>` gets `data-credit="Artwork © Games Workshop"` (or the real licence for other sources).
 Captions are in-universe ("Votive fresco of…", "Pict-capture of…", "Heraldry of the…"). No visible
 credit text in captions; the build lists all credits on Special:ImageCredits.
+
+## Image choice (Martin, 2026-11-25)
+
+- Use the most up-to-date in-universe depiction. A person's infobox shows them as they are now:
+  Lion El'Jonson as returned in the 42nd millennium, Guilliman as Lord Commander in the Era Indomitus,
+  daemon primarchs in their daemonic form; older depictions go lower in the article.
+- Organisations lead with their **symbol**: a Legion or Chapter infobox shows its Legion/Chapter
+  icon (heraldic badge), not the primarch. Same for the Inquisition (the I), Adeptus Mechanicus
+  (the cog-skull), Custodes, Administratum, Ecclesiarchy, Chaos (the eight-pointed star), the
+  Chaos Gods (their marks), xenos factions (their glyphs). Prefer transparent PNG or SVG icons
+  (Fandom has many, e.g. "File:Ultramarines Livery.png", "*_Icon.png", "*Symbol*.svg"); keep
+  PNG/SVG as is (do not convert icons to JPEG); put them on `background:var(--img-bg)`.
+- Add symbols where Wikipedia would: heraldry in Legion tables, faction marks in war infobox
+  belligerent lists (small 20px icons before the name), sigils in navboxes are not needed.
+
+## Infobox colours (Martin, 2026-11-25)
+
+Match Wikipedia's coloured infoboxes:
+
+- **People** (Emperor, primarchs, High Lords, Chapter Masters, Inquisitors, Abaddon...): `<table class="infobox royalty">`,
+  like Wikipedia's royalty box. Shape: `infobox-above` name, `infobox-subheader` main style, image, then one
+  `<tr class="mergedtop"><th colspan="2" class="infobox-header">[[Office]] of the [[X]]</th></tr>` per office with
+  Tenure/Reign, Predecessor, Successor rows under it, then `<tr><td colspan="2" class="infobox-band"></td></tr>`,
+  then the personal rows (Born/Created, Discovered, Died/Status, Allegiance, Homeworld, Other titles, Relatives, Wargear, Known for).
+  See Roboute_Guilliman.html.
+- **Wars and battles, Legions, Chapters, armies**: `<table class="infobox military">` (steel-blue title bar, grey section headers).
+- Everything else keeps the plain `infobox`.
+- Infobox pictures: full, dramatic, full-colour painted art of the subject as they are now; portrait orientation,
+  face in the upper third; crop off any watermark.
+
+## Symbols come from Lexicanum (Martin, 2026-11-25)
+
+Legion, Chapter and organisation symbols use Lexicanum's files, saved as `src/assets/img/icon-<name>.png|jpg`
+(icon-ultramarines.png, icon-inquisition.png, icon-ecclesiarchy.jpg...). Reuse those names; do not add other badge files.
+Lexicanum blocks curl for pages but serves image files: open the page in the browser pane, read the
+infobox `<img>` src, strip `/thumb/` and the size suffix, then curl `https://wh40k.lexicanum.com/mediawiki/images/<h>/<hh>/<File>`.
