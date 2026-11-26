@@ -487,7 +487,11 @@ figure.thumb figcaption .img-credit { text-align: left; }
 .infobox th.infobox-label { padding-right: .6em; }
 .infobox td { padding-left: .35em; }
 /* conflict box closer to Wikipedia's: plain centred section heads, dotted civilian row */
-.infobox.military .infobox-header { background: none; font-size: 112%; padding-top: .5em; }
+/* Conflict box after Wikipedia's Suez Crisis box: shaded section bands, dotted rule between the sides */
+.infobox.military .infobox-header { background: var(--mil-above); font-size: 100%; padding: .2em .4em !important; }
+.infobox.military .infobox-above { background: var(--mil-above); }
+.infobox.military td + td { border-left: 1px dotted #6b7480; padding-left: 6px; }
+.infobox.military tr > td:first-child:not([colspan]) { padding-right: 6px; }
 .infobox.military td.infobox-civilians { text-align: center; border-top: 1px dotted var(--border); padding-top: .3em; }
 .infobox.military td b + br { line-height: 1.2; }
 /* hatnotes sit on a faint band, as in Wikipedia's dark theme */
