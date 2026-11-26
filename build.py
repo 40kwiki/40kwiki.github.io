@@ -85,6 +85,51 @@ def lead_text(body):
     return re.sub(r"\s+", " ", "".join(p.buf)).strip()
 
 
+_FZ = {}
+
+
+def fuzzy(title, titles, redirects):
+    """Resolve near-miss links: any capitalisation, plurals, 'the', hyphens."""
+    if id(titles) not in _FZ:
+        idx = {}
+        for t in titles:
+            idx.setdefault(t.lower(), t)
+        for a, t in redirects.items():
+            if t in titles:
+                idx.setdefault(a.lower(), t)
+        _FZ.clear()
+        _FZ[id(titles)] = idx
+    idx = _FZ[id(titles)]
+    k = title.lower().strip()
+    cands = [k, k.replace("-", " "), k.replace(" ", "-")]
+    if k.startswith("the "):
+        cands.append(k[4:])
+    for c in list(cands):
+        if c.endswith("ies"):
+            cands.append(c[:-3] + "y")
+        if c.endswith("es"):
+            cands.append(c[:-2])
+        if c.endswith("s"):
+            cands.append(c[:-1])
+        cands += [c + "s", c + "es"]
+    for c in cands:
+        if c in idx:
+            return idx[c]
+    return None
+
+
+
+def portal_box(names, pages):
+    """Wikipedia's portal bar: {{portal:Imperium|Horus Heresy}} -> box of portal links with icons."""
+    img = {p["title"]: p["meta"].get("image") for p in pages}
+    items = []
+    for n in [x.strip() for x in names.split("|") if x.strip()]:
+        t = "Portal:" + n
+        icon = img.get(t)
+        pic = f'<img src="{ROOT}assets/img/{icon}" alt="" class="portal-icon">' if icon else ""
+        items.append(f'<li>{pic}[[{t}|{n} portal]]</li>')
+    return '<div class="portal-box" role="navigation" aria-label="Portals"><ul>' + "".join(items) + "</ul></div>"
+
 def render_links(body, page, titles, redirects):
     links = []
     rx = re.compile(r"\[\[([^\[\]|]+?)(?:\|([^\[\]]*))?\]\]([a-z]*)")
@@ -96,6 +141,10 @@ def render_links(body, page, titles, redirects):
         text = (label if label else target.strip().replace("_", " ")) + trail
         hash_ = "#" + anchor(frag) if frag else ""
         real = redirects.get(title, title)
+        if real not in titles:
+            fz = fuzzy(title, titles, redirects)
+            if fz:
+                real = title = fz
         if title not in links:
             links.append(title)
         if real == page["title"] and not frag:
@@ -256,7 +305,8 @@ def build():
         body = p["body"].replace("{{NUMBEROFARTICLES}}", f"{count:,}").replace("{{ARTICLECOUNT}}", f"{count:,} article" + ("" if count == 1 else "s"))
         if kind == "category":
             body = category_body(p, titles)
-        body = re.sub(r"\{\{navbox:([^}]+)\}\}", lambda m: (SRC / "navboxes" / (m.group(1).strip() + ".html")).read_text(encoding="utf-8"), body)
+        body = re.sub(r"\{\{navbox:([^}]+)\}\}", lambda m: (SRC / "navboxes" / (m.group(1).strip() + ".html")).read_text(encoding="utf-8") if (SRC / "navboxes" / (m.group(1).strip() + ".html")).exists() else "", body)
+        body = re.sub(r"\{\{portals?:([^}]+)\}\}", lambda m: portal_box(m.group(1), pages), body)
         if p["title"] == "Special:ImageCredits":
             body = body.replace("{{CREDITS}}", credits_html(pages))
         body, links = render_links(body, p, titles, redirects)

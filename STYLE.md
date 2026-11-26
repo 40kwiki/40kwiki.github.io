@@ -159,3 +159,15 @@ infobox `<img>` src, strip `/thumb/` and the size suffix, then curl `https://wh4
 - The Imperium of Mankind page must have no red links. Check it after every wave.
 - Link generously: first mention of everything, prose, infoboxes and tables. Prefer existing titles and redirects.
 - Give years for everything. When no record has one, give an estimate ("c. 650.M35", "mid-M38") and note it as estimated.
+
+## Conflict infoboxes (Martin, 2026-11-26)
+
+Match Wikipedia's war infobox (see Horus_Heresy.html): in Belligerents, Commanders and leaders, and Strength,
+every entry is its own line with a small flag icon and a link:
+`<span class="fl"><img class="fi" src="../../assets/img/icon-ultramarines.png" alt="" data-credit="Artwork © Games Workshop">[[Roboute Guilliman]]</span>`.
+- Icon = the side's or person's Legion, Chapter, order or faction symbol (`ls src/assets/img | grep icon-`; also aquila.svg, necrons-sigil.png, orks/tyranid marks).
+- Supreme commanders in bold (`<b>[[Horus]]</b>`); add ` †` after anyone killed in that conflict.
+- Strength: one line per force with icon and a number or size where recorded ("c. 120,000 Legionaries", "3 Titan Legions").
+- Link most things. No plain-text names where a page or redirect exists.
+- Fates after commander names, like Wikipedia: ` †` killed in action, ` (WIA)` wounded, ` (MIA)` missing in action, ` (POW)` captured, ` ‡` executed or murdered, ` (DOW)` died of wounds. Add a key row right after the Commanders row when any marker is used:
+  `<tr><td colspan="2" class="infobox-key">† Killed in action · (WIA) Wounded · (MIA) Missing · (POW) Captured · ‡ Executed</td></tr>` (list only the markers used).

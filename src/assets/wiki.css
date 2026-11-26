@@ -32,7 +32,7 @@
   --shadow: 0 2px 4px rgba(0,0,0,.5), 0 6px 24px rgba(0,0,0,.6);
   color-scheme: dark;
 } }
-:root[data-theme="dark"] {
+:root, :root[data-theme="dark"] {
   --bg: #101418; --bg-subtle: #1b1e22; --bg-interactive: #27292d; --bg-hover: #2c2f33;
   --text: #eaecf0; --text-subtle: #a2a9b1; --text-placeholder: #8c939a;
   --border: #72777d; --border-subtle: #54595d; --border-muted: #3a3d41;
@@ -428,5 +428,38 @@ body.ns-main .lang-btn { display: none; }
 .suggestions .sg-thumb { background-position: center 20%; }
 /* Symbols: transparent; black-on-clear logos turn light in dark mode */
 img[src*="/icon-"], img[src*="-mark.png"], img[src*="-icon.png"], img[src*="-sigil.png"], img[src*="-rune.png"], img[src*="-glyph.png"], img[src*="-symbol.png"], img[src*="-seal.png"], img[src*="-badge.png"], img[src*="chaos-star"] { background: transparent !important; border: 0 !important; }
-:root[data-theme="dark"] img[src*="icon-astartes"], :root[data-theme="dark"] img[src*="icon-adeptus-terra"], :root[data-theme="dark"] img[src*="icon-high-lords"], :root[data-theme="dark"] img[src*="icon-administratum"], :root[data-theme="dark"] img[src*="icon-ecclesiarchy"], :root[data-theme="dark"] img[src*="icon-assassinorum"], :root[data-theme="dark"] img[src*="icon-arbites"], :root[data-theme="dark"] img[src*="icon-chaos-star"], :root[data-theme="dark"] img[src*="icon-aquila"] { filter: invert(1); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img[src*="icon-astartes"], :root:not([data-theme="light"]) img[src*="icon-adeptus-terra"], :root:not([data-theme="light"]) img[src*="icon-high-lords"], :root:not([data-theme="light"]) img[src*="icon-administratum"], :root:not([data-theme="light"]) img[src*="icon-ecclesiarchy"], :root:not([data-theme="light"]) img[src*="icon-assassinorum"], :root:not([data-theme="light"]) img[src*="icon-arbites"], :root:not([data-theme="light"]) img[src*="icon-chaos-star"], :root:not([data-theme="light"]) img[src*="icon-aquila"] { filter: invert(1); } }
+:root img[src*="icon-astartes"], :root[data-theme="dark"] img[src*="icon-astartes"], :root[data-theme="dark"] img[src*="icon-navy"], :root[data-theme="dark"] img[src*="icon-adeptus-terra"], :root[data-theme="dark"] img[src*="icon-high-lords"], :root[data-theme="dark"] img[src*="icon-administratum"], :root[data-theme="dark"] img[src*="icon-ecclesiarchy"], :root[data-theme="dark"] img[src*="icon-assassinorum"], :root[data-theme="dark"] img[src*="icon-arbites"], :root[data-theme="dark"] img[src*="icon-chaos-star"], :root[data-theme="dark"] img[src*="icon-aquila"] { filter: invert(1); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img[src*="icon-astartes"], :root:not([data-theme="light"]) img[src*="icon-navy"], :root:not([data-theme="light"]) img[src*="icon-adeptus-terra"], :root:not([data-theme="light"]) img[src*="icon-high-lords"], :root:not([data-theme="light"]) img[src*="icon-administratum"], :root:not([data-theme="light"]) img[src*="icon-ecclesiarchy"], :root:not([data-theme="light"]) img[src*="icon-assassinorum"], :root:not([data-theme="light"]) img[src*="icon-arbites"], :root:not([data-theme="light"]) img[src*="icon-chaos-star"], :root:not([data-theme="light"]) img[src*="icon-aquila"] { filter: invert(1); } }
+
+/* Wikipedia-style flag icons in conflict infoboxes */
+.infobox img.fi{height:16px;width:auto;max-width:24px;object-fit:contain;vertical-align:-3px;margin-right:6px;border:0;background:transparent}
+.infobox .fl{display:block;line-height:1.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.infobox .fl b a{font-weight:bold}
+
+/* Tables never squeeze between floated pictures: they start below them, full width */
+.mw-parser-output .table-wrap, .mw-parser-output > table.wikitable { clear: both; }
+.mw-parser-output .table-wrap > table.wikitable { min-width: min(100%, 560px); }
+/* Tall portraits stay compact */
+figure.thumb img { max-height: 420px; object-fit: contain; }
+.infobox td.infobox-key { font-size: 85%; text-align: center; color: var(--color-subtle, #72777d); padding-top: 2px; }
+
+/* Dark mode only (Martin, 2026-11-26) */
+html { background: #101418; color-scheme: dark; }
+
+/* Wider infobox, and Wikipedia's dotted line between the two sides of a conflict */
+.infobox { width: 26em; }
+.infobox.military td + td { border-left: 1px dotted var(--border); padding-left: 6px; }
+.infobox.military td[colspan] + td, .infobox.military th + td { border-left: 0; padding-left: 0; }
+@media (max-width: 720px) { .infobox { width: auto; } }
+
+/* Portal bar (Wikipedia "Portals:" box) */
+.portal-box { float: right; clear: right; margin: .5em 0 1em 1em; padding: .3em .5em; border: 1px solid var(--border); background: var(--bg-subtle); font-size: 88%; }
+.portal-box ul { list-style: none; margin: 0; padding: 0; }
+.portal-box li { display: flex; align-items: center; gap: 6px; padding: 3px 0; font-weight: bold; }
+.portal-box .portal-icon { width: 28px; height: 28px; object-fit: contain; }
+/* Portal pages */
+.portal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; clear: both; }
+.portal-grid > section { border: 1px solid var(--border-subtle); background: var(--bg-subtle); padding: 0 12px 10px; }
+.portal-grid > section > h2 { margin: 0 -12px 8px; padding: 4px 12px; background: var(--bg-interactive); border-bottom: 1px solid var(--border-subtle); font-size: 1.05em; font-family: inherit; font-weight: bold; }
+.portal-grid .wide { grid-column: 1 / -1; }
+@media (max-width: 720px) { .portal-grid { grid-template-columns: 1fr; } }

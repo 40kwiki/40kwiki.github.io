@@ -27,7 +27,7 @@
     ['small', 'standard', 'large'].forEach(function (s) { H.classList.remove('wp-text-' + s); });
     H.classList.add('wp-text-' + (p.text || 'standard'));
     H.classList.toggle('wp-width-wide', p.width === 'wide');
-    if (p.theme && p.theme !== 'auto') H.setAttribute('data-theme', p.theme); else H.removeAttribute('data-theme');
+    H.setAttribute('data-theme', 'dark');
     H.classList.toggle('wp-toc-hidden', p.toc === 'hidden');
     H.classList.toggle('wp-appearance-hidden', p.appearance === 'hidden');
     $$('.appearance input').forEach(function (i) {
@@ -44,8 +44,7 @@
     return '<div class="menu-heading"><span>Appearance</span>' +
       (pinned ? '<button class="quiet-btn" data-hide-appearance>hide</button>' : '') + '</div>' +
       group('text', 'Text', [['small', 'Small'], ['standard', 'Standard'], ['large', 'Large']]) +
-      group('width', 'Width', [['standard', 'Standard'], ['wide', 'Wide']]) +
-      group('theme', 'Color <span style="font-weight:normal">(beta)</span>', [['auto', 'Automatic'], ['light', 'Light'], ['dark', 'Dark']]);
+      group('width', 'Width', [['standard', 'Standard'], ['wide', 'Wide']]);
   }
   var pinned = $('#appearance-pinned'), drop = $('#appearance-drop');
   if (pinned) pinned.innerHTML = appearanceHtml('ap', true);
