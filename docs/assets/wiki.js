@@ -323,7 +323,7 @@
     var cap = fig && fig.querySelector('figcaption, p, .caption');
     lb = D.createElement('div');
     lb.className = 'lightbox';
-    lb.innerHTML = '<button aria-label="Close">&times;</button><img src="' + img.currentSrc + '" alt="' + esc(img.alt) + '">' + (cap ? '<p>' + cap.innerHTML + '</p>' : '');
+    lb.innerHTML = '<button aria-label="Close">&times;</button><img src="' + img.currentSrc + '" alt="' + esc(img.alt) + '">' + '<p>' + (cap ? cap.innerHTML : '') + (img.getAttribute('data-credit') ? '<br><small style="opacity:.75">' + esc(img.getAttribute('data-credit')) + '</small>' : '') + '</p>';
     lb.addEventListener('click', function (ev) { if (ev.target === lb || ev.target.tagName === 'BUTTON') closeLightbox(); });
     B.appendChild(lb);
   });
@@ -339,7 +339,7 @@
     if (act === 'copy' && navigator.clipboard) navigator.clipboard.writeText(location.href.split('?')[0]);
     if (act === 'cite') {
       var d = new Date().toISOString().slice(0, 10);
-      window.prompt('Cite this page (copy):', '"' + title + '". Warpedia. Retrieved ' + d + '. ' + location.href.split('?')[0]);
+      window.prompt('Cite this page (copy):', '"' + title + '". 40,000 Wiki. Retrieved ' + d + '. ' + location.href.split('?')[0]);
     }
   });
 
@@ -362,15 +362,15 @@
     }
     if (kind === 'missing') {
       var mt = normTitle(param('title') || '');
-      D.title = mt + ' - Warpedia';
+      D.title = mt + ' - 40,000 Wiki';
       $$('#firstHeading .mw-page-title-main, .sticky-title').forEach(function (el) { el.textContent = mt; });
       $('#firstHeading').innerHTML = '<span class="mw-page-title-main">' + esc(mt) + '</span>';
       var linkers = PAGES.filter(function (p) { return (p.l || []).indexOf(mt) > -1; });
       var file = encodeURIComponent(slug(mt) + '.html');
-      sp.innerHTML = '<div class="ambox"><div><b>Warpedia does not have an article with this exact name.</b> Please <a href="' + ROOT +
-        'wiki/Special_Search/?search=' + encodeURIComponent(mt) + '">search for <i>' + esc(mt) + '</i> in Warpedia</a> to check for alternative titles or spellings.</div></div>' +
+      sp.innerHTML = '<div class="ambox"><div><b>40,000 Wiki does not have an article with this exact name.</b> Please <a href="' + ROOT +
+        'wiki/Special_Search/?search=' + encodeURIComponent(mt) + '">search for <i>' + esc(mt) + '</i> in 40,000 Wiki</a> to check for alternative titles or spellings.</div></div>' +
         '<ul><li><a href="https://github.com/martin-k-m/warpedia/new/main/src/articles?filename=' + file + '">Start the <b>' + esc(mt) + '</b> article</a> on GitHub, or ask Claude to write it.</li>' +
-        '<li>Look for pages within Warpedia that <a href="' + ROOT + 'wiki/Special_WhatLinksHere/?target=' + encodeURIComponent(mt) + '">link to this title</a>' +
+        '<li>Look for pages within 40,000 Wiki that <a href="' + ROOT + 'wiki/Special_WhatLinksHere/?target=' + encodeURIComponent(mt) + '">link to this title</a>' +
         (linkers.length ? ' (' + linkers.length + ' page' + (linkers.length > 1 ? 's' : '') + ' already do).' : '.') + '</li>' +
         '<li>Read about it elsewhere: <a href="https://wh40k.lexicanum.com/wiki/' + encodeURIComponent(slug(mt)) + '">Lexicanum</a> · <a href="https://warhammer40k.fandom.com/wiki/' + encodeURIComponent(slug(mt)) + '">Fandom</a></li></ul>';
     }
@@ -386,7 +386,7 @@
     if (kind === 'allpages') {
       var all = PAGES.filter(function (p) { return p.k === 'a' || p.k === 'r' || p.k === 'm'; }).sort(function (a, b) { return a.t.localeCompare(b.t); });
       var cats = PAGES.filter(function (p) { return p.k === 'c'; }).sort(function (a, b) { return a.t.localeCompare(b.t); });
-      sp.innerHTML = '<p>Warpedia has <b>' + articles().length + '</b> articles. Redirects are shown in <i>italics</i>.</p><ul class="allpages">' +
+      sp.innerHTML = '<p>40,000 Wiki has <b>' + articles().length + '</b> articles. Redirects are shown in <i>italics</i>.</p><ul class="allpages">' +
         all.map(function (p) { return '<li class="' + (p.k === 'r' ? 'redir' : '') + '"><a href="' + pageUrl(p.k === 'r' ? p.r : p.t) + '">' + esc(p.t) + '</a></li>'; }).join('') +
         '</ul><h2 style="margin-top:1.2em">Categories</h2><ul class="allpages">' + cats.map(function (p) { return '<li><a href="' + pageUrl(p.t) + '">' + esc(p.t.slice(9)) + '</a></li>'; }).join('') + '</ul>' +
         '<h2 style="margin-top:1.2em">Wanted pages</h2><p>Red links that no article fills yet, most linked first.</p><ol class="allpages" style="list-style:decimal;padding-left:2em">' + wanted() + '</ol>';

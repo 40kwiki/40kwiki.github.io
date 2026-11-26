@@ -1,4 +1,4 @@
-# Warpedia
+# 40,000 Wiki
 
 A Wikipedia-style encyclopedia of the Warhammer 40,000 setting, served by GitHub Pages at
 https://martin-k-m.github.io/warpedia/.

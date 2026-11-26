@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Build Warpedia: src/articles/*.html -> docs/ (served by GitHub Pages)."""
+"""Build 40,000 Wiki: src/articles/*.html -> docs/ (served by GitHub Pages)."""
 import datetime
 import html
 import json
+import os
 import re
 import shutil
 import urllib.parse
@@ -11,7 +12,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SRC = HERE / "src"
-OUT = HERE / "docs"
+OUT = Path(os.environ.get("WIKI_OUT", HERE / "docs"))
 REPO = "martin-k-m/warpedia"
 GH = f"https://github.com/{REPO}"
 ROOT = "../../"
@@ -236,6 +237,8 @@ def build():
     for p in pages:
         for r in p["meta"]["redirects"]:
             redirects[norm(r)] = p["title"]
+    for t in titles:  # a real article always wins over a redirect of the same name
+        redirects.pop(t, None)
 
     articles = [p for p in pages if p["meta"]["kind"] == "article"]
     count = len(articles)
@@ -253,6 +256,9 @@ def build():
         body = p["body"].replace("{{NUMBEROFARTICLES}}", f"{count:,}").replace("{{ARTICLECOUNT}}", f"{count:,} article" + ("" if count == 1 else "s"))
         if kind == "category":
             body = category_body(p, titles)
+        body = re.sub(r"\{\{navbox:([^}]+)\}\}", lambda m: (SRC / "navboxes" / (m.group(1).strip() + ".html")).read_text(encoding="utf-8"), body)
+        if p["title"] == "Special:ImageCredits":
+            body = body.replace("{{CREDITS}}", credits_html(pages))
         body, links = render_links(body, p, titles, redirects)
         body = render_refs(body)
         body, toc = render_headings(body, p)
@@ -329,13 +335,26 @@ def build():
     (OUT / "assets" / "pages.js").write_text(
         "window.WP_PAGES=" + json.dumps(index, ensure_ascii=False, separators=(",", ":")) + ";\n", encoding="utf-8")
     (OUT / "index.html").write_text(
-        '<!DOCTYPE html><meta charset="utf-8"><title>Warpedia</title>'
+        '<!DOCTYPE html><meta charset="utf-8"><title>40,000 Wiki</title>'
         '<meta http-equiv="refresh" content="0; url=wiki/Main_Page/">'
-        '<link rel="canonical" href="wiki/Main_Page/"><a href="wiki/Main_Page/">Warpedia</a>', encoding="utf-8")
+        '<link rel="canonical" href="wiki/Main_Page/"><a href="wiki/Main_Page/">40,000 Wiki</a>', encoding="utf-8")
     (OUT / "404.html").write_text(
         (OUT / "wiki" / "Special_Missing" / "index.html").read_text(encoding="utf-8")
         .replace('"../../', '"/warpedia/'), encoding="utf-8")
     print(f"Built {count} articles, {len(cats)} categories, {len(redirects)} redirects -> {OUT}")
+
+
+def credits_html(pages):
+    seen, rows = set(), []
+    for p in pages:
+        for src, credit in re.findall(r'<img[^>]*src="[^"]*?assets/img/([^"]+)"[^>]*data-credit="([^"]*)"', p["body"]):
+            if src in seen:
+                continue
+            seen.add(src)
+            rows.append(f'<tr><td><img src="{ROOT}assets/img/{src}" width="90" alt="" loading="lazy"></td><td><code>{src}</code></td>'
+                        f'<td>{credit}</td><td>[[{p["title"]}]]</td></tr>')
+    return ('<table class="wikitable"><tr><th>Image</th><th>File</th><th>Credit and licence</th><th>First used on</th></tr>'
+            + "".join(rows) + "</table>")
 
 
 def category_body(p, titles):
