@@ -302,6 +302,47 @@
     if (n) ibox.parentNode.insertBefore(n, ibox);
   }
 
+  /* ---------- Phones: collapsible sections, like Wikipedia's mobile site ---------- */
+  if ($('.mw-parser-output') && window.matchMedia('(max-width: 719px)').matches && !B.classList.contains('ns-main')) {
+    $$('.mw-parser-output > .mw-heading2').forEach(function (head) {
+      var sec = D.createElement('div');
+      sec.className = 'm-section';
+      var n = head.nextSibling;
+      while (n && !(n.nodeType === 1 && n.classList.contains('mw-heading2'))) {
+        var next = n.nextSibling; sec.appendChild(n); n = next;
+      }
+      head.parentNode.insertBefore(sec, head.nextSibling);
+      head.classList.add('m-collapsible');
+      var h2 = head.querySelector('h2');
+      if (h2 && /^(Notes|References|See also|Further reading)$/.test(h2.textContent.trim())) return; // these stay open, like Wikipedia
+      head.classList.add('m-closed');
+      head.addEventListener('click', function (e) {
+        if (e.target.closest('a')) return;
+        head.classList.toggle('m-closed');
+      });
+    });
+    var openFor = function (el) {
+      var sec = el && el.closest && el.closest('.m-section');
+      if (sec && sec.previousElementSibling) sec.previousElementSibling.classList.remove('m-closed');
+      if (el && el.classList && el.classList.contains('mw-heading2')) el.classList.remove('m-closed');
+    };
+    var openHash = function () {
+      if (!location.hash) return;
+      var t = D.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (!t) return;
+      openFor(t.closest('.mw-heading2') || t);
+      setTimeout(function () { t.scrollIntoView(); }, 0);
+    };
+    window.addEventListener('hashchange', openHash);
+    openHash();
+    D.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var t = D.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+      if (t) openFor(t.closest('.mw-heading2') || t);
+    }, true);
+  }
+
   /* ---------- Navboxes ---------- */
   $$('.navbox').forEach(function (nb) {
     var t = nb.querySelector('.navbox-title');

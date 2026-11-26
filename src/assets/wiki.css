@@ -519,3 +519,10 @@ html { scroll-behavior: smooth; }
   .wp-popup, .lightbox, .lightbox img { transition: none; }
   .mw-parser-output ol.references li:target, .mw-parser-output sup:target { animation: none; }
 }
+
+/* Phones: sections fold under their headings, with a chevron, like Wikipedia's mobile site */
+.mw-heading2.m-collapsible { cursor: pointer; position: relative; padding-left: 22px; -webkit-tap-highlight-color: transparent; }
+.mw-heading2.m-collapsible::before { content: ""; position: absolute; left: 4px; top: 50%; width: 8px; height: 8px; border-right: 2px solid var(--text-subtle); border-bottom: 2px solid var(--text-subtle); transform: translateY(-70%) rotate(45deg); transition: transform .2s ease; }
+.mw-heading2.m-collapsible.m-closed::before { transform: translateY(-50%) rotate(-45deg); }
+.mw-heading2.m-closed + .m-section { display: none; }
+.mw-heading2.m-collapsible .mw-editsection { display: none; }
