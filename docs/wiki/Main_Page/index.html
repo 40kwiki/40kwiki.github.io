@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" class="wp-text-standard">
+<head>
+<meta charset="utf-8">
+<title>Main Page - Warpedia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The front page of Warpedia">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:title" content="Main Page - Warpedia">
+<meta property="og:description" content="The front page of Warpedia">
+<link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/img/logo-180.png">
+<script>try{var p=JSON.parse(localStorage.getItem('wp-prefs')||'{}'),c=document.documentElement;c.className='wp-text-'+(p.text||'standard');if(p.width==='wide')c.classList.add('wp-width-wide');if(p.theme&&p.theme!=='auto')c.setAttribute('data-theme',p.theme);if(p.toc==='hidden')c.classList.add('wp-toc-hidden');}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/wiki.css">
+</head>
+<body class="ns-main no-toc" data-title="Main Page" data-root="../../">
+<a class="skip" href="#content">Jump to content</a>
+
+<header class="vh" id="top">
+  <div class="vh-start">
+    <button class="icon-btn" data-dropdown="mainmenu" aria-label="Main menu" aria-expanded="false">
+      <svg viewBox="0 0 20 20"><path d="M1 3v2h18V3zm0 8h18V9H1zm0 6h18v-2H1z"/></svg>
+    </button>
+    <div class="dropdown" id="mainmenu" hidden>
+      <div class="menu-heading">Main menu</div>
+      <div class="menu-sub">Navigation</div>
+      <ul>
+        <li><a href="../../wiki/Main_Page/">Main page</a></li>
+        <li><a href="../../wiki/Special_AllPages/">Contents</a></li>
+        <li><a href="../../wiki/Timeline_of_Warhammer_40,000/">Timeline</a></li>
+        <li><a href="../../wiki/Special_Random/">Random article</a></li>
+        <li><a href="../../wiki/Warpedia_About/">About Warpedia</a></li>
+      </ul>
+      <div class="menu-sub">Contribute</div>
+      <ul>
+        <li><a href="https://github.com/martin-k-m/warpedia#writing-an-article">Help</a></li>
+        <li><a href="https://github.com/martin-k-m/warpedia/new/main/src/articles">Create a page</a></li>
+        <li><a href="https://github.com/martin-k-m/warpedia/commits/main">Recent changes</a></li>
+      </ul>
+    </div>
+    <a class="logo" href="../../wiki/Main_Page/" aria-label="Warpedia main page">
+      <img src="../../assets/img/logo.svg" alt="" width="50" height="50">
+      <span class="logo-text"><span class="wordmark">Warpedia</span><span class="tagline">The Grimdark Encyclopedia</span></span>
+    </a>
+  </div>
+  <div class="vh-search" id="searchbox">
+    <form action="../../wiki/Special_Search/" class="search-form" autocomplete="off" role="search">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 20 20"><path d="M12.2 13.6a7 7 0 1 1 1.4-1.4l5.4 5.4-1.4 1.4zM3 8a5 5 0 1 0 10 0A5 5 0 0 0 3 8"/></svg>
+        <input type="search" name="search" placeholder="Search Warpedia" aria-label="Search Warpedia" accesskey="f">
+        <ul class="suggestions" role="listbox" hidden></ul>
+      </div>
+      <button type="submit" class="search-btn">Search</button>
+    </form>
+  </div>
+  <nav class="vh-end">
+    <button class="icon-btn search-toggle" aria-label="Search"><svg viewBox="0 0 20 20"><path d="M12.2 13.6a7 7 0 1 1 1.4-1.4l5.4 5.4-1.4 1.4zM3 8a5 5 0 1 0 10 0A5 5 0 0 0 3 8"/></svg></button>
+    <button class="icon-btn appearance-btn" data-dropdown="appearance-drop" aria-label="Appearance" aria-expanded="false">
+      <svg viewBox="0 0 20 20"><path d="M10 1a9 9 0 1 0 0 18 2 2 0 0 0 1.5-3.3 1.5 1.5 0 0 1 1.1-2.5H15a4 4 0 0 0 4-4C19 4.6 15 1 10 1M5.5 10a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m4 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/></svg>
+    </button>
+    <div class="dropdown dropdown-right" id="appearance-drop" hidden></div>
+    <a class="vh-link" href="https://github.com/martin-k-m/warpedia">Source</a>
+    <a class="vh-link" href="https://github.com/martin-k-m/warpedia/new/main/src/articles">Create page</a>
+  </nav>
+</header>
+
+<div id="sticky" aria-hidden="true">
+  <div class="sticky-inner">
+    <button class="icon-btn toc-btn" data-dropdown="toc-float" aria-label="Contents"><svg viewBox="0 0 20 20"><path d="M3 9h14V7H3zm0 4h14v-2H3zm0 4h14v-2H3zM3 3v2h14V3z"/></svg></button>
+    <span class="sticky-title"><span class="mw-page-title-main">Main Page</span></span>
+    <a class="icon-btn" href="#top" aria-label="Back to top"><svg viewBox="0 0 20 20"><path d="m10 5 8 10H2z"/></svg></a>
+    <a class="icon-btn sticky-search" href="../../wiki/Special_Search/" aria-label="Search"><svg viewBox="0 0 20 20"><path d="M12.2 13.6a7 7 0 1 1 1.4-1.4l5.4 5.4-1.4 1.4zM3 8a5 5 0 1 0 10 0A5 5 0 0 0 3 8"/></svg></a>
+  </div>
+</div>
+
+<div class="page">
+  <aside class="toc-col" aria-label="Contents">
+    <nav class="toc" id="toc">
+      <div class="toc-head"><h2>Contents</h2><button class="quiet-btn" id="toc-hide">hide</button></div>
+      
+    </nav>
+  </aside>
+
+  <main id="content">
+    <div class="page-head">
+      <button class="icon-btn toc-btn" data-dropdown="toc-float" aria-label="Toggle the table of contents"><svg viewBox="0 0 20 20"><path d="M3 9h14V7H3zm0 4h14v-2H3zm0 4h14v-2H3zM3 3v2h14V3z"/></svg></button>
+      <div class="dropdown toc-float" id="toc-float" hidden></div>
+      <h1 id="firstHeading"><span class="mw-page-title-main">Main Page</span></h1>
+      <button class="lang-btn" disabled title="This article exists only in English">
+        <svg viewBox="0 0 20 20"><path d="M10 1a9 9 0 1 0 0 18 9 9 0 0 0 0-18m6.9 8h-3a14 14 0 0 0-1.3-5.6A7 7 0 0 1 16.9 9M10 17c-.9 0-2.2-2.4-2.5-6h5c-.3 3.6-1.6 6-2.5 6M7.5 9c.3-3.6 1.6-6 2.5-6s2.2 2.4 2.5 6zm-.1-5.6A14 14 0 0 0 6.1 9h-3a7 7 0 0 1 4.3-5.6M3.1 11h3a14 14 0 0 0 1.3 5.6A7 7 0 0 1 3.1 11m9.5 5.6a14 14 0 0 0 1.3-5.6h3a7 7 0 0 1-4.3 5.6"/></svg>
+        <span>Add languages</span>
+      </button>
+    </div>
+    <div class="tabs">
+      <nav class="tabs-left"><a class="sel" href="./">Main Page</a><a href="https://github.com/martin-k-m/warpedia/issues?q=Main%20Page" title="Discussion about the page">Talk</a></nav>
+      <nav class="tabs-right"><a class="sel" href="./">Read</a><a href="https://github.com/martin-k-m/warpedia/edit/main/src/articles/Main_Page.html" title="Edit this page on GitHub">Edit</a><a href="https://github.com/martin-k-m/warpedia/commits/main/src/articles/Main_Page.html" title="Past revisions of this page">View history</a>
+        <div class="tools-wrap">
+          <button class="tab-btn" data-dropdown="tools" aria-expanded="false">Tools <svg viewBox="0 0 20 20"><path d="m17.5 4.75-7.5 7.5-7.5-7.5L1 6.25l9 9 9-9z"/></svg></button>
+          <div class="dropdown dropdown-right" id="tools" hidden>
+            <div class="menu-heading">Tools</div>
+            <div class="menu-sub">Actions</div>
+            <ul><li><a href="./">Read</a></li><li><a href="https://github.com/martin-k-m/warpedia/blob/main/src/articles/Main_Page.html">View source</a></li></ul>
+            <div class="menu-sub">General</div>
+            <ul>
+              <li><a href="../../wiki/Special_WhatLinksHere/?target=Main%20Page">What links here</a></li>
+              <li><a href="https://github.com/martin-k-m/warpedia/commits/main">Related changes</a></li>
+              <li><a href="#" data-action="cite">Cite this page</a></li>
+              <li><a href="#" data-action="copy">Copy link</a></li>
+            </ul>
+            <div class="menu-sub">Print/export</div>
+            <ul><li><a href="#" data-action="print">Download as PDF</a></li><li><a href="#" data-action="print">Printable version</a></li></ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div id="bodyContent" class="mw-body-content">
+      <div id="siteSub">From Warpedia, the grimdark encyclopedia</div>
+      <div id="contentSub"></div>
+      <div class="mw-parser-output">
+<div class="mp-welcome">
+<h1>Welcome to <a href="../../wiki/Warpedia_About/" title="Warpedia:About">Warpedia</a>,</h1>
+<p>the grimdark encyclopedia of the 41st millennium that anyone can read.</p>
+<p style="font-size:.85em;color:var(--text-subtle)">1 article in English · <a href="../Special_AllPages/">Contents</a> · <a href="../Special_Random/">Random article</a></p>
+</div>
+
+<div class="mp-cols">
+<div class="mp-left">
+<div class="mp-box mp-green">
+<h2 class="mp-h2">From today's featured article</h2>
+<img class="mp-img" src="../../assets/img/emperor-throne.jpg" width="120" alt="The Emperor upon the Golden Throne">
+<p>The <b><a href="../../wiki/Imperium_of_Mankind/" title="Imperium of Mankind">Imperium of Mankind</a></b> is the vast interstellar empire of humanity in <i><a href="../../wiki/Special_Missing/?title=Warhammer%2040%2C000" class="new" title="Warhammer 40,000 (page does not exist)">Warhammer 40,000</a></i>. Founded by the <a href="../../wiki/Special_Missing/?title=Emperor%20of%20Mankind" class="new" title="Emperor of Mankind (page does not exist)">Emperor of Mankind</a> at the end of the <a href="../../wiki/Special_Missing/?title=Age%20of%20Strife" class="new" title="Age of Strife (page does not exist)">Age of Strife</a>, it was forged in the <a href="../../wiki/Special_Missing/?title=Great%20Crusade" class="new" title="Great Crusade (page does not exist)">Great Crusade</a> and nearly destroyed in the <a href="../../wiki/Special_Missing/?title=Horus%20Heresy" class="new" title="Horus Heresy (page does not exist)">Horus Heresy</a>, after which the mortally wounded Emperor was interred on the <a href="../../wiki/Special_Missing/?title=Golden%20Throne" class="new" title="Golden Throne (page does not exist)">Golden Throne</a>. Ten thousand years later it spans over a million worlds, ruled in his name by the <a href="../../wiki/Special_Missing/?title=High%20Lords%20of%20Terra" class="new" title="High Lords of Terra (page does not exist)">High Lords of Terra</a>, worshipping him as a god and fighting for survival against <a href="../../wiki/Special_Missing/?title=Chaos%20%28Warhammer%2040%2C000%29" class="new" title="Chaos (Warhammer 40,000) (page does not exist)">Chaos</a>, <a href="../../wiki/Special_Missing/?title=Orks" class="new" title="Orks (page does not exist)">Orks</a>, <a href="../../wiki/Special_Missing/?title=Tyranids" class="new" title="Tyranids (page does not exist)">Tyranids</a> and <a href="../../wiki/Special_Missing/?title=Necrons" class="new" title="Necrons (page does not exist)">Necrons</a>. Split in two by the <a href="../../wiki/Special_Missing/?title=Great%20Rift" class="new" title="Great Rift (page does not exist)">Great Rift</a>, it is now led by the resurrected primarch <a href="../../wiki/Special_Missing/?title=Roboute%20Guilliman" class="new" title="Roboute Guilliman (page does not exist)">Roboute Guilliman</a> in the <a href="../../wiki/Special_Missing/?title=Indomitus%20Crusade" class="new" title="Indomitus Crusade (page does not exist)">Indomitus Crusade</a>.</p>
+<p class="mp-more">(<b><a href="../../wiki/Imperium_of_Mankind/" title="Imperium of Mankind">Full article...</a></b>)</p>
+</div>
+<div class="mp-box mp-green">
+<h2 class="mp-h2">Did you know ...</h2>
+<ul>
+<li>... that the <a href="../../wiki/Special_Missing/?title=Emperor%20of%20Mankind" class="new" title="Emperor of Mankind (page does not exist)">Emperor of Mankind</a> has not issued a recorded command in over ten thousand years, yet every Imperial law is still written in his name?</li>
+<li>... that the <a href="../../wiki/Special_Missing/?title=Imperial%20Guard" class="new" title="Imperial Guard (page does not exist)">Imperial Guard</a> was renamed the <b><a href="../../wiki/Special_Missing/?title=Astra%20Militarum" class="new" title="Astra Militarum (page does not exist)">Astra Militarum</a></b> in 2014?</li>
+<li>... that <a href="../../wiki/Special_Missing/?title=Cadia" class="new" title="Cadia (page does not exist)">Cadia</a> withstood twelve <a href="../../wiki/Special_Missing/?title=Black%20Crusade" class="new" title="Black Crusade (page does not exist)">Black Crusades</a> before falling to the thirteenth in 999.M41?</li>
+<li>... that the <a href="../../wiki/Special_Missing/?title=Squat" class="new" title="Squat (page does not exist)">Squats</a> vanished from the setting in the 1990s and returned in 2022 as the <b><a href="../../wiki/Special_Missing/?title=Leagues%20of%20Votann" class="new" title="Leagues of Votann (page does not exist)">Leagues of Votann</a></b>?</li>
+<li>... that the <a href="../../wiki/Special_Missing/?title=Adepta%20Sororitas" class="new" title="Adepta Sororitas (page does not exist)">Adepta Sororitas</a> exist because of a loophole: the Ecclesiarchy may not keep "men" under arms?</li>
+</ul>
+</div>
+<div class="mp-box mp-green">
+<h2 class="mp-h2">Start reading</h2>
+<ul class="mp-portals">
+<li><b><a href="../../wiki/Imperium_of_Mankind/" title="Imperium of Mankind">The Imperium</a></b><a href="../../wiki/Special_Missing/?title=Emperor%20of%20Mankind" class="new" title="Emperor of Mankind (page does not exist)">Emperor</a> · <a href="../../wiki/Special_Missing/?title=Terra" class="new" title="Terra (page does not exist)">Terra</a> · <a href="../../wiki/Special_Missing/?title=High%20Lords%20of%20Terra" class="new" title="High Lords of Terra (page does not exist)">High Lords</a></li>
+<li><b><a href="../../wiki/Special_Missing/?title=Adeptus%20Astartes" class="new" title="Adeptus Astartes (page does not exist)">Space Marines</a></b><a href="../../wiki/Special_Missing/?title=Ultramarines" class="new" title="Ultramarines (page does not exist)">Ultramarines</a> · <a href="../../wiki/Special_Missing/?title=Dark%20Angels" class="new" title="Dark Angels (page does not exist)">Dark Angels</a> · <a href="../../wiki/Special_Missing/?title=Blood%20Angels" class="new" title="Blood Angels (page does not exist)">Blood Angels</a></li>
+<li><b><a href="../../wiki/Special_Missing/?title=Horus%20Heresy" class="new" title="Horus Heresy (page does not exist)">The Heresy</a></b><a href="../../wiki/Special_Missing/?title=Horus" class="new" title="Horus (page does not exist)">Horus</a> · <a href="../../wiki/Special_Missing/?title=Primarch" class="new" title="Primarch (page does not exist)">Primarchs</a> · <a href="../../wiki/Special_Missing/?title=Siege%20of%20Terra" class="new" title="Siege of Terra (page does not exist)">Siege of Terra</a></li>
+<li><b><a href="../../wiki/Special_Missing/?title=Chaos%20%28Warhammer%2040%2C000%29" class="new" title="Chaos (Warhammer 40,000) (page does not exist)">Chaos</a></b><a href="../../wiki/Special_Missing/?title=Chaos%20Gods" class="new" title="Chaos Gods (page does not exist)">Chaos Gods</a> · <a href="../../wiki/Special_Missing/?title=Black%20Legion" class="new" title="Black Legion (page does not exist)">Black Legion</a> · <a href="../../wiki/Special_Missing/?title=Eye%20of%20Terror" class="new" title="Eye of Terror (page does not exist)">Eye of Terror</a></li>
+<li><b>Xenos</b><a href="../../wiki/Special_Missing/?title=Aeldari" class="new" title="Aeldari (page does not exist)">Aeldari</a> · <a href="../../wiki/Special_Missing/?title=Orks" class="new" title="Orks (page does not exist)">Orks</a> · <a href="../../wiki/Special_Missing/?title=Necrons" class="new" title="Necrons (page does not exist)">Necrons</a> · <a href="../../wiki/Special_Missing/?title=Tyranids" class="new" title="Tyranids (page does not exist)">Tyranids</a> · <a href="../../wiki/Special_Missing/?title=T%27au%20Empire" class="new" title="T&#x27;au Empire (page does not exist)">T'au</a></li>
+<li><b><a href="../../wiki/Special_Missing/?title=Timeline%20of%20Warhammer%2040%2C000" class="new" title="Timeline of Warhammer 40,000 (page does not exist)">Timeline</a></b><a href="../../wiki/Special_Missing/?title=Age%20of%20Strife" class="new" title="Age of Strife (page does not exist)">M1–M30</a> · <a href="../../wiki/Special_Missing/?title=Great%20Crusade" class="new" title="Great Crusade (page does not exist)">M30</a> · <a href="../../wiki/Special_Missing/?title=Era%20Indomitus" class="new" title="Era Indomitus (page does not exist)">M42</a></li>
+</ul>
+</div>
+</div>
+
+<div class="mp-right">
+<div class="mp-box mp-blue">
+<h2 class="mp-h2">In the news</h2>
+<img class="mp-img right" src="../../assets/img/golden-throne.jpg" width="130" alt="The Golden Throne">
+<ul>
+<li>The <b><a href="../../wiki/Special_Missing/?title=Indomitus%20Crusade" class="new" title="Indomitus Crusade (page does not exist)">Indomitus Crusade</a></b> continues under <a href="../../wiki/Special_Missing/?title=Roboute%20Guilliman" class="new" title="Roboute Guilliman (page does not exist)">Roboute Guilliman</a> as fleets push into the <a href="../../wiki/Special_Missing/?title=Imperium%20Nihilus" class="new" title="Imperium Nihilus (page does not exist)">Imperium Nihilus</a>.</li>
+<li><a href="../../wiki/Special_Missing/?title=Lion%20El%27Jonson" class="new" title="Lion El&#x27;Jonson (page does not exist)">Lion El'Jonson</a>, primarch of the <a href="../../wiki/Special_Missing/?title=Dark%20Angels" class="new" title="Dark Angels (page does not exist)">Dark Angels</a>, returns after ten thousand years.</li>
+<li><b><a href="../../wiki/Special_Missing/?title=Hive%20Fleet%20Leviathan" class="new" title="Hive Fleet Leviathan (page does not exist)">Hive Fleet Leviathan</a></b> advances on the Imperium from below the galactic plane.</li>
+<li>The <a href="../../wiki/Special_Missing/?title=Necrons" class="new" title="Necrons (page does not exist)">Necrons</a> of the <b><a href="../../wiki/Special_Missing/?title=Pariah%20Nexus" class="new" title="Pariah Nexus (page does not exist)">Pariah Nexus</a></b> extinguish psychic life across the <a href="../../wiki/Special_Missing/?title=Nephilim%20Sector" class="new" title="Nephilim Sector (page does not exist)">Nephilim Sector</a>.</li>
+</ul>
+<p class="mp-more" style="font-size:.85em">Ongoing: <a href="../../wiki/Special_Missing/?title=Plague%20Wars" class="new" title="Plague Wars (page does not exist)">Plague Wars</a> · <a href="../../wiki/Special_Missing/?title=Arks%20of%20Omen" class="new" title="Arks of Omen (page does not exist)">Arks of Omen</a> · <a href="../../wiki/Special_Missing/?title=Great%20Rift" class="new" title="Great Rift (page does not exist)">Great Rift</a></p>
+</div>
+<div class="mp-box mp-blue">
+<h2 class="mp-h2">From the archives</h2>
+<p style="font-size:.9em;margin-top:0"><b>Events of the Imperial calendar</b></p>
+<ul>
+<li><b>c.&nbsp;798.M30</b> – The <b><a href="../../wiki/Special_Missing/?title=Great%20Crusade" class="new" title="Great Crusade (page does not exist)">Great Crusade</a></b> begins.</li>
+<li><b>005.M31</b> – <a href="../../wiki/Special_Missing/?title=Horus" class="new" title="Horus (page does not exist)">Horus</a> purges the loyalists of four Legions at <b><a href="../../wiki/Special_Missing/?title=Isstvan%20III" class="new" title="Isstvan III (page does not exist)">Isstvan III</a></b>, beginning the <a href="../../wiki/Special_Missing/?title=Horus%20Heresy" class="new" title="Horus Heresy (page does not exist)">Horus Heresy</a>.</li>
+<li><b>014.M31</b> – The <b><a href="../../wiki/Special_Missing/?title=Siege%20of%20Terra" class="new" title="Siege of Terra (page does not exist)">Siege of Terra</a></b> ends; the Emperor is interred on the <a href="../../wiki/Special_Missing/?title=Golden%20Throne" class="new" title="Golden Throne (page does not exist)">Golden Throne</a>.</li>
+<li><b>745.M41</b> – <a href="../../wiki/Special_Missing/?title=Hive%20Fleet%20Behemoth" class="new" title="Hive Fleet Behemoth (page does not exist)">Hive Fleet Behemoth</a> is defeated at the <b><a href="../../wiki/Special_Missing/?title=Battle%20of%20Macragge" class="new" title="Battle of Macragge (page does not exist)">Battle of Macragge</a></b>.</li>
+<li><b>999.M41</b> – <b><a href="../../wiki/Special_Missing/?title=Fall%20of%20Cadia" class="new" title="Fall of Cadia (page does not exist)">Cadia falls</a></b> and the <a href="../../wiki/Special_Missing/?title=Great%20Rift" class="new" title="Great Rift (page does not exist)">Great Rift</a> opens.</li>
+</ul>
+<p class="mp-more">More: <a href="../../wiki/Special_Missing/?title=Timeline%20of%20Warhammer%2040%2C000" class="new" title="Timeline of Warhammer 40,000 (page does not exist)">Timeline of Warhammer 40,000</a></p>
+</div>
+<div class="mp-box mp-purple">
+<h2 class="mp-h2">Today's featured picture</h2>
+<img src="../../assets/img/holy-terra.jpg" alt="Warships in orbit above Holy Terra" style="width:100%;border:1px solid var(--border-subtle)">
+<p style="font-size:.9em">Warships of the <a href="../../wiki/Special_Missing/?title=Imperial%20Navy" class="new" title="Imperial Navy (page does not exist)">Imperial Navy</a> in orbit above <b><a href="../../wiki/Special_Missing/?title=Terra" class="new" title="Terra (page does not exist)">Holy Terra</a></b>, the cradle of humanity and throneworld of the <a href="../../wiki/Imperium_of_Mankind/" title="Imperium of Mankind">Imperium</a>. Its surface is one continuous city, crowned by the <a href="../../wiki/Special_Missing/?title=Imperial%20Palace" class="new" title="Imperial Palace (page does not exist)">Imperial Palace</a>.<br><span class="credit">Artwork © Games Workshop</span></p>
+</div>
+</div>
+</div>
+
+<div class="mp-box" style="border-color:var(--border-subtle);background:var(--bg-subtle)">
+<h2 class="mp-h2" style="background:var(--bg-interactive);border-color:var(--border-subtle)">About Warpedia</h2>
+<p>Warpedia is a personal, ad-free encyclopedia of the <i>Warhammer 40,000</i> setting, laid out like Wikipedia so that every topic reads the same way. <span style="color:var(--link-new)">Red links</span> are articles still to be written. See <a href="../../wiki/Warpedia_About/" title="Warpedia:About">About Warpedia</a> for sources and disclaimers.</p>
+</div>
+
+      </div>
+      
+    </div>
+
+    <footer class="footer">
+      <p>This page was last edited on 25 November 2026.</p>
+      <p>Text is fan-written and available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 License</a>; images carry their own licences, listed on each image's source page. Warpedia is an unofficial fan project, not affiliated with or endorsed by Games Workshop or the Wikimedia Foundation. Warhammer 40,000 and all associated names are trademarks of Games Workshop Limited.</p>
+      <ul class="footer-links">
+        <li><a href="../../wiki/Warpedia_About/">About Warpedia</a></li>
+        <li><a href="../../wiki/Warpedia_About/#Disclaimers">Disclaimers</a></li>
+        <li><a href="https://github.com/martin-k-m/warpedia">Source code</a></li>
+        <li><a href="https://github.com/martin-k-m/warpedia/issues">Report a problem</a></li>
+      </ul>
+    </footer>
+  </main>
+
+  <aside class="side-col" aria-label="Appearance">
+    <div class="appearance" id="appearance-pinned"></div>
+  </aside>
+</div>
+
+<script src="../../assets/pages.js"></script>
+<script src="../../assets/wiki.js"></script>
+</body>
+</html>
