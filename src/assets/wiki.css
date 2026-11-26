@@ -472,3 +472,13 @@ img[src*="icon-apothecarion"], img[src*="icon-armoury"], img[src*="icon-astronom
 /* visible art credit under every lead and figure image */
 .img-credit { display: block; margin-top: 2px; font-size: 11px; line-height: 1.3; color: var(--text-subtle, #a2a9b1); font-style: normal; text-align: center; }
 figure.thumb figcaption .img-credit { text-align: left; }
+/* office infobox (Wikipedia "officeholder"/"office" box): emblem, symbol, incumbent portrait, centred */
+.infobox.office .infobox-above, .infobox.government .infobox-above { background: none; font-size: 125%; padding: .25em .4em; }
+.infobox.office .infobox-image + .infobox-image, .infobox.office tr + tr > .infobox-image { border-top: 1px solid var(--border); }
+.infobox.office .infobox-incumbent { text-align: center; padding: .3em .4em .5em; line-height: 1.5; }
+.infobox.office .incumbent-name { font-weight: bold; font-size: 110%; }
+.infobox.office .infobox-links, .infobox.government .infobox-links { text-align: center; border-top: 1px solid var(--border); padding: .4em; line-height: 1.6; }
+/* government infobox: blue rule under title, small-caps type line, overview header */
+.infobox.government .infobox-above { border-top: 2px solid var(--link); border-bottom: 2px solid var(--link); }
+.infobox.government .infobox-type { text-align: center; font-weight: bold; font-variant: small-caps; letter-spacing: .05em; font-size: 105%; }
+.infobox.government .infobox-header { background: var(--infobox-header, #2a2f36); text-align: center; }

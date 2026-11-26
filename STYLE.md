@@ -168,3 +168,9 @@ every entry is its own line with a small flag icon and a link:
 - Link most things. No plain-text names where a page or redirect exists.
 - Fates after commander names, like Wikipedia: ` †` killed in action, ` (WIA)` wounded, ` (MIA)` missing in action, ` (POW)` captured, ` ‡` executed or murdered, ` (DOW)` died of wounds. Add a key row right after the Commanders row when any marker is used:
   `<tr><td colspan="2" class="infobox-key">† Killed in action · (WIA) Wounded · (MIA) Missing · (POW) Captured · ‡ Executed</td></tr>` (list only the markers used).
+
+## Office and government infoboxes (Martin, 2026-11-26)
+
+- **Offices and titles** use `<table class="infobox office">`, like Wikipedia's Prime Minister box. Model: `Fabricator-General.html`. Order: title, emblem with linked caption, second symbol (aquila or parent body), incumbent portrait, an `infobox-incumbent` row ("Incumbent / [[Name]] / since date"), an `infobox-links` row of related bodies, then Style, Type, Member of, Reports to, Seat, Appointer, Term length, Formation, First holder, Deputy.
+- **Governments, departments and councils** use `<table class="infobox government">`, like Wikipedia's "His Majesty's Government" box. Model: `Adeptus_Terra.html`. Order: title, small-caps `infobox-type` row ("Central government"), logo, "Overview" header, Established, State, Leader, Governing body, Seat, Departments, Staff, Revenue, then `infobox-links`.
+- Every office named in a person's infobox header links to its page (`[[Lord Commander of the Imperium]]`). Link every name, office and body inside every infobox.
