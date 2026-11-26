@@ -307,6 +307,9 @@ def build():
             body = category_body(p, titles)
         body = re.sub(r"\{\{navbox:([^}]+)\}\}", lambda m: (SRC / "navboxes" / (m.group(1).strip() + ".html")).read_text(encoding="utf-8") if (SRC / "navboxes" / (m.group(1).strip() + ".html")).exists() else "", body)
         body = re.sub(r"\{\{portals?:([^}]+)\}\}", lambda m: portal_box(m.group(1), pages), body)
+        # every wikitable scrolls in its own box, so no table can widen the page on a phone
+        body = re.sub(r'<div class="table-wrap">\s*(<table class="wikitable.*?</table>)\s*</div>', r"\1", body, flags=re.S)
+        body = re.sub(r'<table class="wikitable.*?</table>', lambda m: '<div class="table-wrap">' + m.group(0) + '</div>', body, flags=re.S)
         if p["title"] == "Special:ImageCredits":
             body = body.replace("{{CREDITS}}", credits_html(pages))
         body, links = render_links(body, p, titles, redirects)

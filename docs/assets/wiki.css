@@ -433,7 +433,11 @@ img[src*="/icon-"], img[src*="-mark.png"], img[src*="-icon.png"], img[src*="-sig
 
 /* Wikipedia-style flag icons in conflict infoboxes */
 .infobox img.fi{height:16px;width:auto;max-width:24px;object-fit:contain;vertical-align:-3px;margin-right:6px;border:0;background:transparent}
-.infobox .fl{display:block;line-height:1.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.infobox .fl{display:block;line-height:1.5;padding:1px 0 1px 20px;text-indent:-20px}
+/* never let any infobox cell force the box wider than its set width */
+.infobox th,.infobox td{overflow-wrap:anywhere}
+.infobox.military{table-layout:fixed}
+.infobox.military th.infobox-label{width:auto}
 .infobox .fl b a{font-weight:bold}
 
 /* Tables never squeeze between floated pictures: they start below them, full width */
